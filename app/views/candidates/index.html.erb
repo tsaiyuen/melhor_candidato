@@ -6,6 +6,9 @@
   User id: <%= c.user %><br>
   City: <%= c.city %><br>
   Time of Experience: <%= c.experience %><br>
-  Technologies: <%= c.technologies %><br>
+  Technologies: <%= JSON.parse(c.technologies).zip((JSON.parse(c.maintech))).flatten %><br>
+
   </ul>
 <% end %>
+
+  

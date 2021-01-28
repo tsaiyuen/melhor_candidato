@@ -2,7 +2,7 @@ require 'json'
 require 'open-uri'
 require 'pry-byebug'
 
-puts "cleaning db"
+puts "cleaning db..."
 Candidate.destroy_all
 puts "Finished cleaning db"
 
@@ -12,18 +12,22 @@ file = open(url).read
 db = JSON.parse(file)
 
 
-main = []
+puts "Creating users from JSON file..."
 db["candidates"].each do |info|
+  maintech = []
   technologies = []
   user = info["id"]
   city = info["city"]
   experience = info["experience"]
   info["technologies"].each do |n|
     technologies << n["name"]
-    main << n["is_main_tech"]
+    maintech << n["is_main_tech"]
   end 
-  Candidate.create(user: user, city: city, experience: experience, technologies: technologies)
+
+    #binding.pry
+  Candidate.create(user: user, city: city, experience: experience, technologies: technologies, maintech: maintech)
 end
+puts "Finished creating users from JSON file =)"
 
 
 
