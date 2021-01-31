@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  resources :candidates, only: [:index, :show]
+  root to: 'pages#home'
+
+  resources :candidates, only: :index do
+    post 'search_result', on: :collection
+  end
+
 end

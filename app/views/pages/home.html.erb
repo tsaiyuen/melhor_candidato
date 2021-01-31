@@ -1,0 +1,39 @@
+<h1>This is the home page, with filters and the index with all candidates</h1>
+
+<%= form_with url: "/candidates/search_result", method: :post, local: true do |form| %>
+  <%= form.label :query, "Cidade:" %>
+  <%= form.select("city_id", @cities) %>
+  <%= form.label :query, "Tecnologias:" %>
+  <%= form.select("technology_id", @technologies) %>
+  <%= form.label :query, "Tempo de Experiência:" %>
+  <%= form.select("experience_range_name", @experience_ranges) %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<% @candidates.each do |c| %>
+  <ul>
+  User id: <%= c.external_id %><br>
+  City: <%= c.city.name %><br>
+  Time of Experience: <%= c.experience_range.name %><br>
+  Technologies: <%= c.technologies.map(&:name) %><br>
+  </ul>
+<% end %>
+
+
+
+
+
+
+<%#= form_with url: @candidates_path, method: :get do |f| %>
+  <%#= f.label :technologies, "Tecnologias:" %>
+  <%#= f.text_field :technologies %>
+  <%#= f.label :experience, "Tempo de Experiência" %>
+  <%#= f.text_field :experience %>
+  <%#= f.label :city, "Cidade" %>
+  <%#= f.text_field :city %>
+  <%#= submit_tag "Procurar Candidato" %>
+<%# end %>
+
+
+
+

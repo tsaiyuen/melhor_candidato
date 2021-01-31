@@ -1,6 +1,5 @@
 class Candidate < ApplicationRecord
-  validates :user, presence:true
-  validates :city, presence:true
-  validates :experience, presence:true
-  validates :technologies, presence:true
+  belongs_to :city
+  belongs_to :experience_range
+  has_and_belongs_to_many :technologies
 end

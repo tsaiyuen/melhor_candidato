@@ -1,23 +1,4 @@
-<h1>This is the home page, with filters and the index with all candidates</h1>
 
-<%= form_with url: @candidates_path do |f| %>
-  <%= f.label :Tecnologias %>
-  <%= f.text_field :technologies %>
-  <%= f.label :Tempo_de_experiencia %>
-  <%= f.text_field :experience %>
-  <%= f.label :Cidade %>
-  <%= f.text_field :city %>
-  <%= submit_tag "Procurar Candidato" %>
-<% end %>
 
-<% @candidates.each do |c| %>
-  <ul>
-  User id: <%= c.user %><br>
-  City: <%= c.city %><br>
-  Time of Experience: <%= c.experience %><br>
-  Technologies: <%= JSON.parse(c.technologies).zip((JSON.parse(c.maintech))).flatten %><br>
-
-  </ul>
-<% end %>
 
   

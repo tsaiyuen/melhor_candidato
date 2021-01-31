@@ -10,19 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_141807) do
+ActiveRecord::Schema.define(version: 2021_01_31_205306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "candidates", force: :cascade do |t|
-    t.integer "user"
-    t.string "city"
-    t.string "experience"
-    t.string "technologies"
+    t.integer "external_id"
+    t.bigint "city_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "maintech"
+    t.bigint "experience_range_id", null: false
+    t.index ["city_id"], name: "index_candidates_on_city_id"
+    t.index ["experience_range_id"], name: "index_candidates_on_experience_range_id"
   end
 
+  create_table "candidates_technologies", id: false, force: :cascade do |t|
+    t.bigint "candidate_id", null: false
+    t.bigint "technology_id", null: false
+    t.index ["candidate_id", "technology_id"], name: "index_candidates_technologies_on_candidate_id_and_technology_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_cities_on_name", unique: true
+  end
+
+  create_table "experience_ranges", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "technologies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_technologies_on_name", unique: true
+  end
+
+  add_foreign_key "candidates", "cities"
+  add_foreign_key "candidates", "experience_ranges"
 end

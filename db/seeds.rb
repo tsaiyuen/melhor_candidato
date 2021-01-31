@@ -2,9 +2,10 @@ require 'json'
 require 'open-uri'
 require 'pry-byebug'
 
-puts "cleaning db..."
-Candidate.destroy_all
-puts "Finished cleaning db"
+# puts "cleaning db..."
+# Candidate.destroy_all
+# Tech.destroy_all
+# puts "Finished cleaning db"
 
 url = URI("https://geekhunter-recruiting.s3.amazonaws.com/code_challenge.json")
 
@@ -14,19 +15,23 @@ db = JSON.parse(file)
 
 puts "Creating users from JSON file..."
 db["candidates"].each do |info|
-  maintech = []
-  technologies = []
-  user = info["id"]
-  city = info["city"]
-  experience = info["experience"]
-  info["technologies"].each do |n|
-    technologies << n["name"]
-    maintech << n["is_main_tech"]
-  end 
+  # maintech = []
+  # technologies = []
+  # user = info["id"]
+  # city = info["city"]
+  # experience = info["experience"]
+  candidate = Candidate.new
+  candidate.external_id = info["id"]
+  candidate.city = City.find_or_create_by(name: info["city"])
+  candidate.experience_range = ExperienceRange.find_or_create_by(name: info["experience"])
 
-    #binding.pry
-  Candidate.create(user: user, city: city, experience: experience, technologies: technologies, maintech: maintech)
+  candidate.technologies = info["technologies"].map do |technology|
+    Technology.find_or_create_by(name: technology["name"])
+  end
+
+  candidate.save!
 end
+#binding.pry
 puts "Finished creating users from JSON file =)"
 
 
