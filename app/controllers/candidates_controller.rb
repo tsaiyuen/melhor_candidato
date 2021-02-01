@@ -16,7 +16,7 @@ class CandidatesController < ApplicationController
 
   def search_result
     
-    @candidates = Candidate.includes(:candidates_technologies, :experience_ranges).where(
+    @candidates = Candidate.includes(:candidates_technologies, :experience_range).where(
       candidates_technologies: {technology_id: params[:technology_id]},
       city_id: params[:city_id],
       experience_ranges: {name: params[:experience_range_name]}

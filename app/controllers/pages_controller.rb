@@ -19,11 +19,8 @@ class PagesController < ApplicationController
     ]
 
     @technologies = Technology.all.collect { |p| [ p.name, p.id ] }
-    #if params[:city_id]
-    #  @candidates = Candidate.where(city_id: params[:city_id])
-    #else
     @candidates = Candidate.all
-    #end
+
   end
 
   def search
