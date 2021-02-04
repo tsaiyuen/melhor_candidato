@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   
   def home
     @cities = City.all.collect { |p| [ p.name, p.id ] }
+    
     @experience_ranges = [
       "0-1 years", 
       "1-2 years", 
@@ -25,7 +26,7 @@ class PagesController < ApplicationController
 
   def search
     @candidates = Candidate.all
-
+    
   end
 
 end

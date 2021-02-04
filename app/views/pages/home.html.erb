@@ -30,10 +30,10 @@
       <% @candidates.each do |c| %>
     <div class="candidate">
         <ul>
-        User id: <%= c.external_id %><br>
-        City: <%= c.city.name %><br>
-        Time of Experience: <%= c.experience_range.name %><br>
-        Technologies: <%= c.technologies.map(&:name) %><br>
+        <strong>User id:</strong> <%= c.external_id %><br>
+        <strong>City:</strong> <%= c.city.name %><br>
+        <strong>Time of Experience:</strong> <%= c.experience_range.name %><br>
+        <strong>Technologies:</strong> <%= c.technologies.map(&:name) %><br>
         </ul>
       <% end %>
     </div>
