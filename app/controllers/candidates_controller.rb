@@ -1,26 +1,19 @@
 class CandidatesController < ApplicationController
 
   def index
-# binding.pry
     @candidates = Candidate.where(city_id: params[:city_id])
-    #render :index
-#    technologies = params[:technologies] # {technologies: ['1', '2']}
-#    @candidates = Candidate.where(technologies: tech) # where in array, where mach array
-#    
-#    Candidate
-#    has_many
-#    
-#    Technology
-#    belongs_to
   end
 
   def search_result
     
-    @candidates = Candidate.includes(:candidates_technologies, :experience_range).where(
-      candidates_technologies: {technology_id: params[:technology_id]},
-      city_id: params[:city_id],
-      experience_ranges: {name: params[:experience_range_name]}
-    )
+    @candidates = CandidateSearcher.call(params[:technology_id], params[:city_id], params[:experience_range_name])
+    
+    #essas linhas de código foram para services->candidate_search. Agora o candidateSearcher vai procurar pelos params
+    #Candidate.includes(:candidates_technologies, :experience_range).where(
+    #  candidates_technologies: {technology_id: params[:technology_id]},
+    #  city_id: params[:city_id],
+    #  experience_ranges: {name: params[:experience_range_name]}
+    #)
     render :search_result
   end
 
