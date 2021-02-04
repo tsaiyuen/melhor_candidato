@@ -1,8 +1,26 @@
-<% @candidates.each do |c| %>
-  <ul>
-  User id: <%= c.external_id %><br>
-  City: <%= c.city.name %><br>
-  Time of Experience: <%= c.experience_range.name %><br>
-  Technologies: <%= c.technologies.map(&:name) %><br>
-  </ul>
-<% end %>
+<div class="candidates-container">  
+  <% if @candidates.present? %>
+    <div class="title">
+      <h2>Lista de candidatos qualificados:</h2>
+    </div>
+
+    <div class="candidate">
+      <% @candidates.each do |c| %>
+       <ul>
+        User id: <%= c.external_id %><br>
+        City: <%= c.city.name %><br>
+        Time of Experience: <%= c.experience_range.name %><br>
+        Technologies: <%= c.technologies.map(&:name) %><br>
+        </ul>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="title">
+    <h2>Não existe candidatos com estas características, por favor tente novamente.</h2>
+    </div>
+  <% end %>
+  <div class="btn">
+    <%= link_to "Voltar para Home Page", root_path %>
+</div>
+
+
