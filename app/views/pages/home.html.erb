@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> %>
   <title>Melhor Candidato</title>
 </head>
 <body>
@@ -27,8 +28,8 @@
   </div>
 
   <div class="candidates-container">
+    <div class="d-flex align-content-around flex-wrap"">
       <% @candidates.each do |c| %>
-    <div class="candidate">
         <ul>
         <strong>User id:</strong> <%= c.external_id %><br>
         <strong>City:</strong> <%= c.city.name %><br>
@@ -41,24 +42,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-<%#= form_with url: @candidates_path, method: :get do |f| %>
-  <%#= f.label :technologies, "Tecnologias:" %>
-  <%#= f.text_field :technologies %>
-  <%#= f.label :experience, "Tempo de Experiência" %>
-  <%#= f.text_field :experience %>
-  <%#= f.label :city, "Cidade" %>
-  <%#= f.text_field :city %>
-  <%#= submit_tag "Procurar Candidato" %>
-<%# end %>
-
-
-
-
